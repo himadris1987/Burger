@@ -1,4 +1,4 @@
-var connection = require ("../controllers/connection.js");
+var connection = require ("../config/connection.js");
 
 function printQuestionMarks(num) {
     var arr = [];
@@ -31,8 +31,8 @@ function objToSql(ob){
 
 
 var orm = {
-    selectAll: function (tableInput, cb){
-        var queryString = "SELECT * FROM" + tableInput + ";";
+    all: function (tableInput, cb){
+        var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
@@ -80,6 +80,7 @@ updateOne: function (table, objColVals, condition, cb){
 
 };
 
+module.exports=orm;
 
 
 

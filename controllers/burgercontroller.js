@@ -1,17 +1,15 @@
 var express = require ("express");
 
-var router = express.Router ();
+var router = express.Router();
 
-var burger = require ("../models/burger.js");
+var burgers = require ("../models/burger.js");
 
-router.get("/", function(req,res){
-    res.redirect("index");
-})
 
-router.get ("/api/index", function (req,res){
-    burger.all(function(data){
+
+router.get ("/", function (req,res){
+    burgers.all(function(data){
         var hbsObject={
-            burgers: data
+            burger: data
         };
         console.log (hbsObject);
         res.render ("index", hbsObject);
@@ -19,7 +17,7 @@ router.get ("/api/index", function (req,res){
 });
 
 router.post("/api/burgers/insertOne", function (req, res){
-    burger.insertOne([
+    burgers.insertOne([
         "burger_name", "devoured"
     ],
     [req.body.name, false],
@@ -32,7 +30,7 @@ router.put ("/api/updateOne/:id", function (req,res){
     var condition ="id =" + req.params.id;
     console.log ("condition", condition);
 
-    burger.updateOne({devoured: req.body.devoured}, condition, function(result){
+    burgers.updateOne({devoured: req.body.devoured}, condition, function(result){
         if (result.changedRows == 0){
             return res.status(404).end();
         } else {
@@ -40,5 +38,7 @@ router.put ("/api/updateOne/:id", function (req,res){
         }
     });
     });
+
+    module.exports=router;
 
 
