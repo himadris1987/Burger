@@ -41,6 +41,7 @@ var orm = {
         });
     },
     insertOne: function (table, cols, vals, cb){
+        console.log ("hihi");
         var queryString = "INSERT INTO" + table;
 
         queryString += " (";
